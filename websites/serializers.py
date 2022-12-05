@@ -1,9 +1,9 @@
-from .models import Contact
+import websites.models as models
 from rest_framework import serializers
 
 
 # contact serializer class
-class ContactSerializer(serializers.ModelSerializer):
+class ContactUsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Contact
+        model = models.ContactUs
         fields = "__all__"
