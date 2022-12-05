@@ -1,5 +1,6 @@
 from django.contrib import admin
 import courses.models as models
+import images.models as images_models
 from django.utils.html import format_html
 from django.urls import reverse
 
@@ -24,13 +25,13 @@ class CourseImageAdmin(admin.ModelAdmin):
 @admin.register(models.CourseCategoryImage)
 class CourseCategoryImageAdmin(admin.ModelAdmin):
 
-    def image_display(self, obj):
-        return format_html('<img src="{}" width="auto" height="50px />'.format(obj.image.url))
+    # def image_display(self, obj):
+    #     return format_html('<img src="{}" width="auto" height="50px />'.format(obj.image.url))
 
-    image_display.short_description = 'image_display'
+    # image_display.short_description = 'image_display'
 
     list_display = [field.name for field in models.CourseCategoryImage._meta.fields]
-    list_display.append("image_display")
+    # list_display.append("image_display")
     list_filter = [field.name for field in models.CourseCategoryImage._meta.fields]
 
 
@@ -38,9 +39,9 @@ class CourseCategoryImageAdmin(admin.ModelAdmin):
 @admin.register(models.CourseCategory)
 class CourseCategoryAdmin(admin.ModelAdmin):
 
-    def image_display(self, instance):
-        return format_html('<img src="{}" width="auto" height="50px />'.format(instance.thumbnail.coursecategoryimage.image.url))
-    image_display.short_description = 'image_display'
+    # def image_display(self, instance):
+    #     return format_html('<img src="{}" width="auto" height="50px />'.format(instance.thumbnail.coursecategoryimage.image.url))
+    # image_display.short_description = 'image_display'
 
     # class CourseCatagoeryInline(admin.StackedInline):
     #     model = models.Course
@@ -51,10 +52,10 @@ class CourseCategoryAdmin(admin.ModelAdmin):
     #         ]
 
     # list_display = ["id", "name", "discription", "image_tag", "created_at", "updated_at"]#[field.name for field in models.CourseCategory._meta.fields]
-    readonly_fields = ["image_display"]
+    # readonly_fields = ["image_display"]
     list_display = [field.name for field in models.CourseCategory._meta.fields]
     list_filter = [field.name for field in models.CourseCategory._meta.fields]
-    list_display.append("image_display")
+    # list_display.append("image_display")
 
 
 
@@ -62,31 +63,47 @@ class CourseCategoryAdmin(admin.ModelAdmin):
 @admin.register(models.CourseInstructure)
 class CourseInstructureAdmin(admin.ModelAdmin):
 
-    def image_display(self, instance):
-        return format_html('<img src="{}" width="50px" height="50px />'.format(instance.thumbnail.image.url))
+    def images(self, obj):
+            html = '<a href="{url}" target="_blank"><img src="{url}" style="width: auto;height: 50px;" /></a>'
+        return format_html(''.join(html.format(url=inst.image.url) for inst in obj.course_image.all()))
 
-    image_display.short_description = 'image_display'
+
     list_display = [field.name for field in models.CourseInstructure._meta.fields]
     list_filter = list_display
 
+class CourseImagesInline(admin.StackedInline):
+    model = models.CourseImage
+    extra = 0
 
-
+class CourseCommentsInline(admin.StackedInline):
+    model = models.CourseComments
+    extra = 0
 
 @admin.register(models.Course)
 class CoursesAdmin(admin.ModelAdmin):
-    # def image_display(self, objs):
-    #     rel_list = "<ol>"
-    #     for obj in objs.thumbnails.prefetch_related():
-    #         link = reverse("admin:images_image_change", args=[obj.id])
-    #         rel_list += f"<li><a href='{link}'><img src='{obj.image.url}' width='50px' height='50px' /></a></li>"
-    #     rel_list += "</ol>"
-    #     return format_html(rel_list)
 
-    # image_display.short_description = 'image_display'
+
+    inlines = [
+            CourseImagesInline,
+            CourseCommentsInline
+            ]
+
+    def images(self, obj):
+        html = '<a href="{url}" target="_blank"><img src="{url}" style="width: auto;height: 50px;" /></a>'
+        return format_html(''.join(html.format(url=inst.image.url) for inst in obj.course_image.all()))
+
+    def comments(self, obj):
+        html = '<a href="{}"<span/>{} | <b>{}</b></span></a>'
+        return format_html(''.join(html.format(reverse('admin:comments_comment_change', args=(inst.id,)), inst.comment, inst.name) for inst in obj.course_comment.all()))
+
+    images.short_description = 'images'
+    comments.short_description = 'comments'
 
 
     list_display = [field.name for field in models.Course._meta.fields]
     list_filter = [field.name for field in models.Course._meta.fields]
-    # list_display.append("image_display")
+    list_display.append("images")
+    list_display.append("comments")
+    readonly_fields = ('images',)
 
-    list_select_related = ('course_instructure', 'course_catagoery')
+    # list_select_related = ('course_instructure', 'course_catagoery')
