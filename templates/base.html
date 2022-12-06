@@ -10,16 +10,11 @@
 <body>
     <div id="content">
         {% include '_partiales/nav_bar.html' %}
-        {% block main-content %}{% endblock %}
+
     </div>
     <div id="cta">
-        {% include '_partiales/hero_section.html' %}
-        {% include '_partiales/ceo_video.html' %}
-        {% include '_partiales/card_panal_2.html' %}
-        {% include '_partiales/best_clients.html' %}
-        {% include '_partiales/card_panal.html' %}
-        {% include '_partiales/reviews.html' %}
-        {% include '_partiales/cta.html' %}
+        {% block main-content %}
+        {% endblock %}
     </div>
     <div id="footer">
         {% include '_partiales/footer.html' %}

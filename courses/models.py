@@ -18,10 +18,11 @@ class CourseCategory(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.name or ""
 
 class CourseCategoryImage(Image):
-    course_catagoery = models.ForeignKey(CourseCategory, on_delete=models.CASCADE)
+    course_catagoery = models.ForeignKey(CourseCategory, on_delete=models.CASCADE, related_name="course_catagoery_image")
+
 
 class CourseInstructure(models.Model):
 
@@ -29,6 +30,7 @@ class CourseInstructure(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="user", null=True
     )
+    # course = models.ForeignKey(Course, related_name="course", on_delete=models.CASCADE)
     discription = models.TextField(blank=True, null=True)
     job_title = models.CharField(max_length=255, blank=True, null=True)
     facebook_link = models.CharField(max_length=255, blank=True, null=True)
@@ -39,10 +41,10 @@ class CourseInstructure(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.email
+        return self.user.email or ""
 
 class InstructureImage(Image):
-   course_instructure = models.ForeignKey(CourseInstructure, on_delete=models.CASCADE)
+   course_instructure = models.ForeignKey(CourseInstructure, on_delete=models.CASCADE, related_name="course_instructure_image")
 
 class Course(models.Model):
 
@@ -50,7 +52,7 @@ class Course(models.Model):
     course_catagoery = models.ForeignKey(
         CourseCategory, on_delete=models.CASCADE, related_name="course_catagoery"
     )
-    course_instructure = models.ManyToManyField(CourseInstructure, related_name="course_instructure")
+    course_instructure = models.ForeignKey(CourseInstructure, related_name="course_instructure", on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
     course_code = models.CharField(max_length=255, blank=True, null=True)
     course_mode = models.CharField(max_length=255, blank=True, null=True)
@@ -59,7 +61,7 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.name or ""
 
 
 class CourseComments(Comment):

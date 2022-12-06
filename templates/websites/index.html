@@ -5,6 +5,9 @@ Home Page
 {% endblock%}
 
 
-{% block content %}
-<h1>Index page</h1>
+{% block main-content %}
+
+{% include '_partiales/hero_section.html' %}
+{% include '_partiales/ceo_video.html' %}
+{% include 'websites/_partiales/popular_courses.html' %}
 {% endblock %}
