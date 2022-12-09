@@ -11,11 +11,7 @@ class ContactUsSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class HomeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = courses_models.Course
-        fields = "__all__"
-
-    class Meta:
-        model = events_models.Event
-        fields = "__all__"
+# class HomeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = courses_models.Course
+#         fields = "__all__"

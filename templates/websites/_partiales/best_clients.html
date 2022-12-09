@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="mx-5">
+    <div class="text-center p-5">
+        <p class="h3 ">Our Best Clients</p>
+        <span>We envision specialized and customized trainings for every business arena to get mastery in decision
+            making.</span>
+        <div class="width-50 pt-5">
+            {% for d in data.clients|slice:":6" %}
+            <img alt="{{d.name}}" src={{d.client_image.image}}
+                class="img-fluid  rounded-circle thubmnails-medium m-2" />
+            {% endfor %}
+            <!-- <img alt="" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+                class="img-fluid  rounded-circle thubmnails-medium m-2" />
+            <img alt="" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+                class="img-fluid  rounded-circle thubmnails-medium m-2" />
+            <img alt="" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+                class="img-fluid  rounded-circle thubmnails-medium m-2" />
+            <img alt="" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+                class="img-fluid  rounded-circle thubmnails-medium m-2" />
+            <img alt="" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"
+                class="img-fluid  rounded-circle thubmnails-medium m-2" /> -->
+        </div>
+    </div>
+</div>

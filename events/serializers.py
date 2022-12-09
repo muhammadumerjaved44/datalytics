@@ -1,24 +1,37 @@
-import  courses.models as models
+
+from .models import Event, EventType, EventImage, EventComment
 from rest_framework import serializers
 
 
-# contact serializer class
-class CourseCategorySerializer(serializers.ModelSerializer):
+class EventImageSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = models.CourseCategory
+        model = EventImage
         fields = "__all__"
 
-class CourseAuthorSerializer(serializers.ModelSerializer):
+class EventCommentSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = models.CourseAuthor
+        model = EventComment
         fields = "__all__"
 
-class CommentsSerializer(serializers.ModelSerializer):
+
+class EventTypeSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = models.Comments
+        model = EventType
         fields = "__all__"
 
-class CoursesSerializer(serializers.ModelSerializer):
+
+class EventSerializer(serializers.ModelSerializer):
+
+    event_type = EventTypeSerializer(many=False, required=False, allow_null=True)
+    event_images = EventImageSerializer(many=True, required=False, allow_null=True)
+    event_comments = EventCommentSerializer(many=True)
+
+
     class Meta:
-        model = models.Courses
-        fields = "__all__"
+        model = Event
+        fields = ["id","event_type","name","start_date","end_date","repea_time","by_day","time_zone","discription","location","created_at","updated_at","event_images", "event_comments"
+        ]
+        # fileds = "__all__"
