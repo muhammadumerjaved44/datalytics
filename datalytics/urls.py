@@ -25,4 +25,7 @@ admin.site.index_title = "Welcome to Datalytics  Portal"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("websites.urls")),
+    path("", include("courses.urls")),
+    path("", include("events.urls")),
+    path("", include("clients.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
