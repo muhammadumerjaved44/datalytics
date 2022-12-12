@@ -3,8 +3,8 @@
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 140.6%;
 
     margin: 0;
     padding: 0;
@@ -139,3 +139,36 @@
     height:100%;
     padding-top: 25%;
 }
+
+
+.div-warper{
+    padding: 5rem 11.786rem;
+    gap: 2.143rem;
+
+}
+
+
+.gap-30{
+    gap: 2.143rem
+}
+
+.gap-20{
+    gap: 1.429rem
+}
+
+.gap-10{
+    gap: 0.714
+}
+
+.pad-30{
+    padding: 2.143rem
+}
+
+.pad-20{
+    padding: 1.429rem
+}
+
+.pad-10{
+    padding: 0.714
+}
+
