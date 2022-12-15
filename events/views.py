@@ -7,12 +7,6 @@ from rest_framework import status
 import events.models as models
 import events.serializers as serializers
 
-
-
-
-
-
-
 class EventView(APIView):
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]

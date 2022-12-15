@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "drf_yasg",
     "polymorphic",
+    "django_q",
+    "django_flatpickr",
     "websites",
     "courses",
     "comments",
@@ -66,7 +68,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "datalytics.urls"
 
-print(os.path.join(BASE_DIR,'templates'))
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -119,7 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Karachi"
 
 USE_I18N = True
 
@@ -140,3 +142,16 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+Q_CLUSTER = {
+    "name": "datalytics",
+    'workers': 1,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+
+}

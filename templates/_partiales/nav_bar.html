@@ -24,10 +24,9 @@
                             Courses
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Python</a></li>
-                            <li><a class="dropdown-item" href="#">PowerBI</a></li>
-                            <li><a class="dropdown-item" href="#">Microsoft Excel</a></li>
-                            <li><a class="dropdown-item" href="#">PowerBI</a></li>
+                            {% for d in data.course_catagoery|slice:":6" %}
+                            <li><a class="dropdown-item" href="#">{{d.name}}</a></li>
+                            {% endfor %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

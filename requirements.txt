@@ -16,3 +16,9 @@ uritemplate
 pyyaml
 ipython
 django-polymorphic
+django-q
+redis
+croniter
+django-bootstrap-datepicker-plus
+django-bootstrap4
+

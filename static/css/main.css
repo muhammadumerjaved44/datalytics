@@ -3,9 +3,7 @@
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
     line-height: 140.6%;
-
     margin: 0;
     padding: 0;
 }
@@ -142,7 +140,7 @@
 
 
 .div-warper{
-    padding: 5rem 11.786rem;
+    padding: 70px 165px;
     gap: 2.143rem;
 
 }
@@ -172,3 +170,11 @@
     padding: 0.714
 }
 
+@media (min-width: 500px){
+
+        .text-align-center-small{
+            text-align: center;
+        }
+
+
+}

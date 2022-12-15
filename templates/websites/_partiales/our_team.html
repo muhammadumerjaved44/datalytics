@@ -1,0 +1,72 @@
+{% load static %}
+<div class="container bg-light py-5">
+    <div class=" d-flex flex-column">
+        <h2 class="text-center"> Popular Courses</h2>
+        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut
+            labore et
+            dolore magna aliqua. Ut enim ad minim veniam,</p>
+
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-2 mt-5">
+        <!-- {% for d in data.courses|slice:":3" %}
+        <div class="col">
+            <div class="card m-3">
+                <img src="{{d.course_image.0.image}}" class=" card-img-top" alt="{{ d.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ d.name }}</h5>
+                    <p class="card-text">{{d.discription}}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %} -->
+        <div class="col ">
+            <div class="card h-100">
+                <img src="{% static 'thumbnails/mustafa.png'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional
+                        content. This content is a little bit longer.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="card h-100">
+                <img src="{% static 'thumbnails/yousaf.png'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a short card.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="card h-100">
+                <img src="{% static 'thumbnails/umer.png'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional
+                        content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="card h-100">
+                <img src="{% static 'thumbnails/aysham.png'%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                        additional
+                        content. This content is a little bit longer.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,18 +3,33 @@ import events.models as models
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+import events.forms as forms
 
+from django_q import models as q_models
+from django_q import admin as q_admin
 
-# @admin.register(models.EventImage)
-# class EventImage(admin.ModelAdmin):
-#     pass
-# @admin.register(models.EventComment)
-# class EventComment(admin.ModelAdmin):
-#     pass
+admin.site.unregister([q_models.Failure])
+@admin.register(q_models.Failure)
+class ChildClassAdmin(q_admin.FailAdmin):
+    list_display = (
+        'name',
+        'func',
+        'result',
+        'started',
+        # add attempt_count to list_display
+        'attempt_count'
+    )
 
 
 @admin.register(models.Event)
 class EventAdmin(admin.ModelAdmin):
+
+    form = forms.EventForm
+
+    # class Media:
+    #     js = (
+    #         '//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js', # jquery
+    #     )
     class EventsImageInline(admin.StackedInline):
         model = models.EventImage
         extra = 0

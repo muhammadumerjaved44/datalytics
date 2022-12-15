@@ -21,9 +21,7 @@ import courses.serializers as courses_serializers
 import events.serializers as events_serializers
 import clients.serializers as clients_serializers
 
-class HomeIndex(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'websites/index.html'
+class MainView(APIView):
 
     def get(self, request, pk=None, format=None):
         course_raw =  courses_models.Course.objects.all()
@@ -35,25 +33,74 @@ class HomeIndex(APIView):
         clients_raw =  clients_models.Clients.objects.all()
         clients = clients_serializers.ClientsSerializer(clients_raw, many=True)
 
+
+        course_catagoery_raw =  courses_models.CourseCategory.objects.all()
+        course_catagoery = courses_serializers.CourseCategorySerializer(course_catagoery_raw, many=True)
+
         context = {}
         context['courses'] = courses.data
         context["events"] = events.data
         context["clients"] = clients.data
+        context["course_catagoery"] = course_catagoery.data
 
+        return context
+
+class HomeIndex(MainView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'websites/index.html'
+
+    def get(self, request, pk=None, format=None):
+        main = MainView()
+        context = main.get(request, pk=None, format=None)
+        print(context)
 
         return Response({"stauts": "success", "data": context}, status=status.HTTP_200_OK)
 
-# def index(request):
-#     if request.method== "GET":
-#         courses_list = courses_models.Course.objects.all()
-#         course_images = course
+class AboutIndex(MainView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'about_us/index.html'
 
-#         context = {}
+    def get(self, request, pk=None, format=None):
+        main = MainView()
+        context = main.get(request, pk=None, format=None)
+        print(context)
 
-#         # add the dictionary during initialization
-#         context["data"] = courses_list
+        return Response({"stauts": "success", "data": context}, status=status.HTTP_200_OK)
 
-#         return render(request, "websites/index.html", context)
+class ServicesIndex(MainView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'services/index.html'
+
+    def get(self, request, pk=None, format=None):
+        main = MainView()
+        context = main.get(request, pk=None, format=None)
+        print(context)
+
+        return Response({"stauts": "success", "data": context}, status=status.HTTP_200_OK)
+
+class ServicesIndex(MainView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'services/index.html'
+
+    def get(self, request, pk=None, format=None):
+        main = MainView()
+        context = main.get(request, pk=None, format=None)
+        print(context)
+
+        return Response({"stauts": "success", "data": context}, status=status.HTTP_200_OK)
+
+
+
+class APIIndex(MainView):
+    # renderer_classes = [TemplateHTMLRenderer]
+    # template_name = 'about_us/index.html'
+
+    def get(self, request, pk=None, format=None):
+        main = MainView()
+        context = main.get(request, pk=None, format=None)
+        print(context)
+
+        return Response({"stauts": "success", "data": context}, status=status.HTTP_200_OK)
 
 
 # Contact form view
